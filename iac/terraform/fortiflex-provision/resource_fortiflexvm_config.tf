@@ -155,5 +155,5 @@ resource "fortiflexvm_config" "config" {
 }
 
 output "config" {
-  value = fortiflexvm_config.config
+  value = var.enable_output ? fortiflexvm_config.config : null
 }

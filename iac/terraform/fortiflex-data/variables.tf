@@ -1,4 +1,4 @@
-variable "enable_debug_output" {
+variable "enable_output" {
   description = "Enable/Disable debug output"
   default     = true
 }

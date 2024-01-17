@@ -8,5 +8,5 @@ resource "fortiflexvm_entitlements_vm" "entitlements_vm" {
 }
 
 output "entitlements_vm" {
-  value = fortiflexvm_entitlements_vm.entitlements_vm
+  value = var.enable_output ? fortiflexvm_entitlements_vm.entitlements_vm : null
 }

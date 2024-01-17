@@ -8,7 +8,7 @@ variable "fortiflex_config_name" {
   default     = ""
 }
 
-variable "enable_debug_output" {
-  description = "Enable/Disable debug output"
+variable "enable_output" {
+  description = "Enable/Disable output"
   default     = true
 }
