@@ -6,5 +6,5 @@ data "fortiflexvm_entitlements_list" "entitlements_list" {
 }
 
 output "entitlements_list" {
-  value = data.fortiflexvm_entitlements_list.entitlements_list
+  value = var.enable_output ? data.fortiflexvm_entitlements_list.entitlements_list : null
 }

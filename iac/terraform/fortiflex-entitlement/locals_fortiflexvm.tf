@@ -28,5 +28,5 @@ locals {
 }
 
 output "debug_fortiflex_configs_map" {
-  value = var.enable_debug_output ? local.fortiflex_configs_map : null
+  value = var.enable_output ? local.fortiflex_configs_map : null
 }

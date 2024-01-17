@@ -26,13 +26,13 @@ locals {
 }
 
 output "debug_programs_map" {
-  value = var.enable_debug_output ? local.programs_map : null
+  value = var.enable_output ? local.programs_map : null
 }
 
 output "debug_configs_map" {
-  value = var.enable_debug_output ? local.configs_map : null
+  value = var.enable_output ? local.configs_map : null
 }
 
 output "debug_configs_map_list" {
-  value = var.enable_debug_output ? local.configs_map_list : null
+  value = var.enable_output ? local.configs_map_list : null
 }

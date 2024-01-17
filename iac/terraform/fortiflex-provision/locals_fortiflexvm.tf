@@ -13,9 +13,12 @@ locals {
       status                = "ACTIVE"
       product_config = [
         {
-          cpu_size    = "4"
-          service_pkg = "ATP"
-          vdom_num    = "0"
+          cpu_size            = "4"
+          service_pkg         = "ATP"
+          vdom_num            = "0"
+          cloud_services      = []
+          fortiguard_services = []
+          support_service     = ""
         }
       ]
     }

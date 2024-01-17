@@ -6,5 +6,5 @@ data "fortiflexvm_configs_list" "configs_list" {
 }
 
 output "configs_list" {
-  value = data.fortiflexvm_configs_list.configs_list
+  value = var.enable_output ? data.fortiflexvm_configs_list.configs_list : null
 }
