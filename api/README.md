@@ -36,7 +36,7 @@ For example:
     V2: https://support.fortinet.com/ES/api/fortiflex/v2/
   ```
 
-  ![FortiFlex Parameters](images/fortiflex-parameters.png)
+  ![FortiFlex Parameters](images/fortiflex-parameters.jpg)
 
 ## Setup
 
