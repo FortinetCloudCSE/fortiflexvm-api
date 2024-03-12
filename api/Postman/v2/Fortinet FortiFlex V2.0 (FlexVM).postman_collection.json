@@ -1,0 +1,1083 @@
+{
+	"info": {
+		"_postman_id": "fe86c96a-a67a-4d9c-a5b4-af7e81850096",
+		"name": "Fortinet FortiFlex V2.0 (FlexVM)",
+		"description": "FortiFlex REST API\n\nProduct Type IDs are available as Global Variables",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "347075",
+		"_collection_link": "https://fortinetsecdevops.postman.co/workspace/0e096ec3-0bbc-4171-86ec-3269fd2f897f/collection/347075-fe86c96a-a67a-4d9c-a5b4-af7e81850096?action=share&source=collection_link&creator=347075"
+	},
+	"item": [
+		{
+			"name": "Programs",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/programs/list",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"programs",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "APIs to work with FortiFlex Programs"
+		},
+		{
+			"name": "Configurations",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000000\",\n    \"accountId\": 100000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/configs/list",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"configs",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000101\",\n    \"accountId\": 100000,\n    \"name\": \"Test Configuration\",\n    \"productTypeId\": {{FGT_VM_BUNDLE}},\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/configs/create",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"configs",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 22,\n    \"name\": \"New Configuration name\",\n    \"parameters\": [\n        {\n            \"id\": {{FGT_VM_BUNDLE}},\n            \"value\": \"8\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api//fortiflex/v2/configs/update",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"",
+								"fortiflex",
+								"v2",
+								"configs",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disable",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/configs/disable",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"configs",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enable",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/configs/enable",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"configs",
+								"enable"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "APIs to work with FortiFlex Configurations"
+		},
+		{
+			"name": "Entitlements",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"configId\": 672\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/list",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vm/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"configId\": \"000\",\n    \"count\": \"0\",\n    \"description\": \"VM Entitlements\",\n    \"endDate\": \"YYYY-MM-DD\",\n    \"folderPath\": \"My Assets/vm_entitlements\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/vm/create",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"vm",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hardware/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"configId\": 22,\n    \"serialNumbers\": [\n        \"FGT60FTK19000010\",\n        \"FGT60FTK19000013\"\n    ],\n    \"endDate\": \"2026-10-11 00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/hardware/create",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"hardware",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cloud/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"configId\": \"000\",\n    \"endDate\": \"YYYY-MM-DD 00:00:00\",\n    \"folderPath\": \"My Assets/cloud_entitlements\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/cloud/create",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"cloud",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\",\n    \"configId\": \"000\",\n    \"description\": \"VM04 UTM\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/update",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stop",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/stop",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"stop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reactivate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/reactivate",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"reactivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vm/token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/vm/token",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"vm",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "points by config id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"configId\": \"000\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/flexvm/fortiflex/v2/entitlements/points",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"flexvm",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "points by serial number",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountId\": 123456,\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/points",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sourceAccountId\": 7777777,\n    \"sourceConfigId\": 333,\n    \"targetAccountId\": 8888888,\n    \"targetConfigId\": 999,\n    \"serialNumbers\": [ \"FGVMELTM55500016\", \"FGVMELTM55500017\" ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/transfer",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"entitlements",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "APIs to work with FortiFlex Entitlements"
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountId\": 1234567\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/groups/list",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"groups",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nexttoken",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountId\": 12345,\n    \"folderPath\": \"My Assets/Department A/FortiFlex Group 1\",\n    \"configId\": 12,\n    \"status\": [\n        \"ACTIVE\",\n        \"PENDING\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/groups/nexttoken",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"groups",
+								"nexttoken"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "APIs to work with FortiFlex groups (asset folders)"
+		},
+		{
+			"name": "Tools",
+			"item": [
+				{
+					"name": "calc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000123\",\n    \"count\": 3,\n    \"productTypeId\": 1,\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://support.fortinet.com/ES/api/fortiflex/v2/tools/calc",
+							"protocol": "https",
+							"host": [
+								"support",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"ES",
+								"api",
+								"fortiflex",
+								"v2",
+								"tools",
+								"calc"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "APIs to work with FortiFlex tools"
+		},
+		{
+			"name": "Authenticate",
+			"item": [
+				{
+					"name": "Retrieve Auth Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var respJsonData = JSON.parse(responseBody)",
+									"console.log(responseBody)",
+									"console.log(respJsonData)",
+									"",
+									"if (respJsonData.access_token) {",
+									"  pm.environment.set(\"access_token\", respJsonData.access_token)",
+									"  pm.environment.set(\"refresh_token\", respJsonData.refresh_token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{api-username}}\",\n    \"password\": \"{{api-password}}\",\n    \"client_id\": \"{{client_id}}\",\n    \"grant_type\": \"{{grant_type}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://customerapiauth.fortinet.com/api/v1/oauth/token/",
+							"protocol": "https",
+							"host": [
+								"customerapiauth",
+								"fortinet",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"oauth",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "APIs to Authenticate with Fortinet FortiCloud Portal"
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "FGT_VM_BUNDLE",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "FMG_VM",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"key": "FWB_VM",
+			"value": "3",
+			"type": "string"
+		},
+		{
+			"key": "FGT_VM_LCS",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"key": "FC_EMS_OP",
+			"value": "5",
+			"type": "string"
+		},
+		{
+			"key": "FAZ_VM",
+			"value": "7",
+			"type": "string"
+		},
+		{
+			"key": "FPC_VM",
+			"value": "8",
+			"type": "string"
+		},
+		{
+			"key": "FAD_VM",
+			"value": "9",
+			"type": "string"
+		},
+		{
+			"key": "FGT_HW",
+			"value": "101",
+			"type": "string"
+		},
+		{
+			"key": "FWBC_PRIVATE",
+			"value": "202",
+			"type": "string"
+		},
+		{
+			"key": "FWBC_PUBLIC",
+			"value": "203",
+			"type": "string"
+		},
+		{
+			"key": "FC_EMS_CLOUD",
+			"value": "204",
+			"type": "string"
+		},
+		{
+			"key": "FORTISASE",
+			"value": "205",
+			"type": "string"
+		}
+	]
+}
