@@ -30,6 +30,8 @@ FGT_HW = 101                                # FortiGate Hardware
 FWBC_PRIVATE = 202                          # FortiWeb Cloud - Private
 FWBC_PUBLIC = 203                           # FortiWeb Cloud - Public
 FC_EMS_CLOUD = 204                          # FortiClient EMS Cloud
+FORTISASE = 205                             # FortiSASE
+FORTIEDR = 206                              # FortiEDR
 
 # Product Parameters                        # Valid Values
 
@@ -37,9 +39,9 @@ FC_EMS_CLOUD = 204                          # FortiClient EMS Cloud
 # FortiGate VM - Service Bundle           #
 ###########################################
 FGT_VM_BUNDLE_CPU_SIZE = 1                  # 1 - 96 inclusive
-FGT_VM_BUNDLE_SVC_PKG = 2                   # "FC" = FortiCare 
+FGT_VM_BUNDLE_SVC_PKG = 2                   # "FC" = FortiCare
                                             # "UTP" = UTP
-                                            # "ENT" = Enterprise 
+                                            # "ENT" = Enterprise
                                             # "ATP" = ATP
                                             # "UTM" = UTM (no longer available)
 FGT_VM_BUNDLE_VDOM_NUM = 10                 # 0 - 500 inclusive
@@ -211,6 +213,9 @@ FWBC_PRIVATE_WEB_APPLICATIONS = 33          # 0 - 2000 inclusive
 FWBC_PUBLIC_AVERAGE_THROUGHPUT = 34        # All Mbps - 10, 25, 50, 75, 100, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000
 FWBC_PUBLIC_WEB_APPLICATIONS = 35          # 0 - 2000 inclusive
 
+###########################################
+# FortiEMS Cloud                          #
+###########################################
 FC_EMS_CLOUD_ZTNA_NUM = 37                 # Value should be divisible by 25. 0 - 25000 inclusive
 FC_EMS_CLOUD_ZTNA_FGF_NUM = 38             # Value should be divisible by 25. 0 - 25000 inclusive
 FC_EMS_CLOUD_EPP_ZTNA_NUM = 39             # Value should be divisible by 25. 0 - 25000 inclusive
@@ -218,6 +223,22 @@ FC_EMS_CLOUD_EPP_ZTNA_FGF_NUM = 40         # Value should be divisible by 25. 0 
 FC_EMS_CLOUD_CHROMEBOOK = 41               # Value should be divisible by 25. 0 - 25000 inclusive
 FC_EMS_CLOUD_ADDONS = 42                   # "BPS" = FortiCare Best Practice
 
+###########################################
+# FortiSASE                               #
+###########################################
+FORTISASE_USER = 48                        # 50 - 50000 inclusive
+FORTISASE_SERVICEPACK = 49                 # FSASESTD or FSASEADV
+FORTISASE_BANDWIDTH = 50                   # 0 or 25 - 10000 inclusive
+FORTISASE_DEDICATEDIP = 51                 # 0 or 4 - 65534 inclusive
+
+###########################################
+# FortiEDR                                #
+###########################################
+FORTIEDR_SERVICEPACK = 46                  # FSASESTD or FSASEADV
+FORTIEDR_ENDPOINT = 47                     # Read-only
+FORTIEDR_ADDONS = 52                       # FEDRXDR = XDR
+
+# FortiCloud and FortiFlex API Endpoints
 FORTIFLEX_API_BASE_URI = "https://support.fortinet.com/ES/api/fortiflex/v2/"
 FORTICARE_AUTH_URI = "https://customerapiauth.fortinet.com/api/v1/oauth/token/"
 
@@ -273,7 +294,9 @@ def programs_list(access_token):
     headers = COMMON_HEADERS.copy()
     headers["Authorization"] = f"Bearer {access_token}"
 
-    results = requests_post(uri, "", headers)
+    body = {}
+
+    results = requests_post(uri, body, headers)
     return results
 
 
@@ -483,6 +506,25 @@ def entitlements_hardware_create(
     results = requests_post(uri, body, headers)
     return results
 
+def entitlements_cloud_create(
+    access_token, config_id, end_date=None
+):
+    """Create FortiFlex Cloud Entitlement - V2"""
+    logging.debug("--> Create FortiFlex Cloud Entitlement...")
+
+    uri = FORTIFLEX_API_BASE_URI + "entitlements/cloud/create"
+    headers = COMMON_HEADERS.copy()
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    # None is a valid value for endDate, defaults to Program End Date
+    body = {
+        "configId": config_id,
+        "endDate": end_date,
+    }
+
+    results = requests_post(uri, body, headers)
+    return results
+
 
 def entitlements_points(
     access_token,
@@ -578,6 +620,48 @@ def entitlements_vm_token(access_token, serial_number):
     results = requests_post(uri, body, headers)
     return results
 
+def entitlements_transfer(access_token, source_account_id, source_config_id, target_account_id, target_config_id, serial_numbers):
+    """Transfer FortiFlex Entitlement - V2"""
+    logging.debug("--> Transfer FortiFlex Entitlement...")
+
+    uri = FORTIFLEX_API_BASE_URI + "entitlements/transfer"
+    headers = COMMON_HEADERS.copy()
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    body = {
+        "sourceAccountId": source_account_id,
+        "sourceConfigId": source_config_id,
+        "targetAccountId": target_account_id,
+        "targetConfigId": target_config_id,
+        "serialNumbers": serial_numbers,
+        }
+
+    results = requests_post(uri, body, headers)
+    return results
+
+def tools_calc(
+    access_token,
+    program_serial_number,
+    count,
+    product_type_id,
+    parameters
+):
+    """Calculate FortiFlex Points Consumption - V2"""
+    logging.debug("--> Calculate FortiFlex Points Consumption...")
+
+    uri = FORTIFLEX_API_BASE_URI + "tools/calc"
+    headers = COMMON_HEADERS.copy()
+    headers["Authorization"] = f"Bearer {access_token}"
+
+    body = {
+        "programSerialNumber": program_serial_number,
+        "count": count,
+        "productTypeId": product_type_id,
+        "parameters": parameters,
+    }
+
+    results = requests_post(uri, body, headers)
+    return results
 
 if __name__ == "__main__":
     # Set credentials in enviroment or locally
@@ -616,8 +700,8 @@ if __name__ == "__main__":
     #### List FortiFlex Configurations ####
     #######################################
 
-    # PROGRAM_SERIAL_NUMBER = 'ELAVMR0000000241'  # Replace with your program serial number
-    # ACCOUNT_ID = 1127201                        # Replace with your account ID
+    # PROGRAM_SERIAL_NUMBER = 'ELAVMR0000000000'  # Replace with your program serial number
+    # ACCOUNT_ID = 1000000                        # Replace with your account ID
     # config_list = configs_list(
     #     api_access_token,
     #     PROGRAM_SERIAL_NUMBER,
@@ -703,7 +787,7 @@ if __name__ == "__main__":
     #### List FortiFlex Groups ####
     ###############################
 
-    # ACCOUNT_ID = 1127201                       # Replace with your account ID
+    # ACCOUNT_ID = 1000000                       # Replace with your account ID
     # groups_list = groups_list(api_access_token, ACCOUNT_ID)
     # if groups_list:
     #     print(json.dumps(groups_list))
@@ -711,7 +795,7 @@ if __name__ == "__main__":
     #### Get FortiFlex Group Next Token without config ID ####
     ##########################################################
 
-    # ACCOUNT_ID = 1127201                         # Replace with your account ID
+    # ACCOUNT_ID = 1000000                         # Replace with your account ID
     # FOLDER_PATH = 'My Assets/VM04-ATP-01'        # Replace with your folder path
     # groups_nexttoken = groups_nexttoken(
     #     api_access_token,
@@ -725,7 +809,7 @@ if __name__ == "__main__":
     #### Get FortiFlex Group Next Token with config ID ####
     #######################################################
 
-    # ACCOUNT_ID = 1127201                         # Replace with your account ID
+    # ACCOUNT_ID = 1000000                         # Replace with your account ID
     # FOLDER_PATH = 'My Assets/VM04-ATP-01'        # Replace with your folder path
     # CONFIG_ID = 4711                             # Replace with your config ID
     # groups_nexttoken = groups_nexttoken(
@@ -741,8 +825,8 @@ if __name__ == "__main__":
     #### List FortiFlex Entitlements by Program Serial Number and account ID ####
     #############################################################################
 
-    # PROGRAM_SERIAL_NUMBER = "ELAVMR0000000241"   # Replace with your program serial number
-    # ACCOUNT_ID = 1127201                         # Replace with your account ID
+    # PROGRAM_SERIAL_NUMBER = "ELAVMR0000000000"   # Replace with your program serial number
+    # ACCOUNT_ID = 1000000                         # Replace with your account ID
 
     # entitlements_list = entitlements_list(
     #     api_access_token,
@@ -824,7 +908,7 @@ if __name__ == "__main__":
     # SERIAL_NUMBER = 'FGVMMLTM21006013'           # Replace with your serial number
     # CONFIG_ID = 584                              # Replace with your config ID
     # DESCRIPTION = "VM02 UTP"                     # Replace with your description
-    # END_DATE = '2023-12-31'                      # Replace with your end date - can be set to None or ommitted
+    # END_DATE = '2024-12-31'                      # Replace with your end date - can be set to None or ommitted
 
     # entitlements_update = entitlements_update(
     #     api_access_token,
@@ -836,3 +920,30 @@ if __name__ == "__main__":
 
     # if entitlements_update:
     #     print(json.dumps(entitlements_update))
+
+    #### Calculate Points Consumption   ####
+    ########################################
+
+    # PROGRAM_SERIAL_NUMBER = 'ELAVMR0000000000'  # Replace with your program serial number
+    # COUNT = 2                                   # Replace with count of entitlements
+    # PRODUCT_TYPE_ID = FGT_VM_BUNDLE             # Replace with product type ID to calculate
+
+    # PARAMETERS = [                             # Replace with your configuration parameters
+    #         {
+    #             "id": FGT_VM_BUNDLE_CPU_SIZE,
+    #             "value": "2"
+    #         },
+    #         {
+    #             "id": FGT_VM_BUNDLE_SVC_PKG,
+    #             "value": "ATP"
+    #         }
+    #     ]
+    # tools_calc = tools_calc(
+    #     api_access_token,
+    #     PROGRAM_SERIAL_NUMBER,
+    #     COUNT,
+    #     PRODUCT_TYPE_ID,
+    #     PARAMETERS
+    # )
+    # if tools_calc:
+    #     print(json.dumps(tools_calc))
