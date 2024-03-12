@@ -3,7 +3,7 @@
     John McDonough (@movinalot)
     Fortinet
 
-    Scannec by FortiDevSec
+    Scanned by FortiDevSec
 """
 
 # pylint: disable=too-many-arguments, line-too-long
