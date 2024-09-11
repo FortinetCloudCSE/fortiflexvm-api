@@ -3,7 +3,7 @@
 
 provider "registry.terraform.io/fortinetdev/fortiflexvm" {
   version     = "2.3.2"
-  constraints = "~> 2.0"
+  constraints = "~> 2.3.0"
   hashes = [
     "h1:RiP65CDEZkB0YlooScHk006pvJ+cyH3B1OEJy4LUQGQ=",
     "zh:15fcc4d0fdcee4fadae34ba7ba195d66fca8ef0d0520ad4a10857ce022a8ced7",

@@ -528,12 +528,12 @@ def entitlements_cloud_create(
 
 def entitlements_points(
     access_token,
+    program_serial_number,
     start_date,
     end_date,
-    account_id,
-    program_serial_number,
     config_id=None,
     serial_number=None,
+    account_id=None,
 ):
     """Get FortiFlex Entitlements Points - V2"""
     logging.debug("--> Get FortiFlex Entitlements Points...")
@@ -544,17 +544,23 @@ def entitlements_points(
 
     body = {
         "programSerialNumber": program_serial_number,
-        "accountId": account_id,
         "startDate": start_date,
         "endDate": end_date,
     }
 
-    #  configId for all configId entitlements OR serialNumber for a single VM
+    # config_id alone will retrieve all entitlement point consumption for the config
+    # config_id and serial_number will retrieve that entitlement's point consumption
+    # account_id and config_id is the same as just config_id
+    # account_id alone will retrieve all entitlement point consumption for the account
+
     if config_id:
         body["configId"] = config_id
 
     if serial_number:
         body["serialNumber"] = serial_number
+
+    if account_id:
+        body["accountId"] = account_id
 
     results = requests_post(uri, body, headers)
     return results
@@ -908,7 +914,7 @@ if __name__ == "__main__":
     # SERIAL_NUMBER = 'FGVMMLTM21006013'           # Replace with your serial number
     # CONFIG_ID = 584                              # Replace with your config ID
     # DESCRIPTION = "VM02 UTP"                     # Replace with your description
-    # END_DATE = '2024-12-31'                      # Replace with your end date - can be set to None or ommitted
+    # END_DATE = '2024-12-31'                      # Replace with your end date - can be set to None or omitted
 
     # entitlements_update = entitlements_update(
     #     api_access_token,
@@ -947,3 +953,31 @@ if __name__ == "__main__":
     # )
     # if tools_calc:
     #     print(json.dumps(tools_calc))
+
+    ##### Retrieve Point Consumption ####
+    #####################################
+
+    # config_id alone will retrieve all entitlement point consumption for the config
+    # config_id and serial_number will retrieve that entitlement's point consumption
+    # account_id and config_id is the same as just config_id
+    # account_id alone will retrieve all entitlement point consumption for the account
+
+    # PROGRAM_SERIAL_NUMBER = "ELAVMR0000000000"   # Replace with your program serial number
+    # ACCOUNT_ID = 1000000                         # Replace with your account ID
+    # STATE_DATE = '2023-12-31'                    # Replace with your state date
+    # END_DATE = '2024-12-31'                      # Replace with your end date
+    # CONFIG_ID = 4711                             # Replace with your config ID
+    # SERIAL_NUMBER = 'FGVMMLTM21006013'           # Replace with your serial number
+
+
+    # entitlements_points = entitlements_points(
+    #     api_access_token,
+    #     PROGRAM_SERIAL_NUMBER,
+    #     STATE_DATE,
+    #     END_DATE,
+    #     CONFIG_ID,
+    #     SERIAL_NUMBER,
+    #     ACCOUNT_ID,
+    # )
+    # if entitlements_points:
+    #     print(json.dumps(entitlements_points))
