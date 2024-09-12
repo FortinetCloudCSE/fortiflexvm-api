@@ -1,0 +1,48 @@
+---
+
+- name: FortiFlex Get Entitlement Point Usage
+  hosts: localhost
+  gather_facts: no
+
+  collections:
+    - fortinet.fortiflexvm
+
+  tasks:
+    - name: Get entitlements points
+      fortiflexvm_entitlements_points_info:
+        # provide configId or (accountId and programSerialNumber).
+        configId: "{{ configId }}"
+        accountId: "{{ accountId }}"
+        programSerialNumber: "{{ programSerialNumber }}"
+        # Instead of configId pass serialNumber to get results for one VM.
+        serialNumber: "{{ serialNumber }}"
+        startDate: "{{ startDate }}"
+        endDate: "{{ endDate }}"
+      register: result
+
+    - name: Display Point Usage
+      ansible.builtin.debug:
+        var: result.entitlements
+
+# This playbook can be run with the following command:
+# ansible-playbook ./fortiflex-points-by-config.yml -e '{"configId": 678, "programSerialNumber": "ELAVMR0000000241", "serialNumber": "FGVMELTM22000197", "accountId": 1127201, "startDate": "2023-09-01", "endDate": "2024-09-13"}'
+
+# The output will be similar to:
+# PLAY [FortiFlex Get Entitlement Point Usage] ******************************************************************************************************
+
+# TASK [Get entitlements points] ********************************************************************************************************************
+# ok: [localhost]
+
+# TASK [Display Point Usage] ************************************************************************************************************************
+# ok: [localhost] => {
+#     "result.entitlements": [
+#         {
+#             "accountId": 1127201,
+#             "points": 559.52,
+#             "serialNumber": "FGVMELTM22000197"
+#         }
+#     ]
+# }
+
+# PLAY RECAP ****************************************************************************************************************************************
+# localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 

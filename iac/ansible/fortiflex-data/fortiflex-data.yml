@@ -1,5 +1,9 @@
+---
+
 - name: FortiFlex Programs, Configs and VMs
   hosts: localhost
+  gather_facts: no
+
   collections:
     - fortinet.fortiflexvm
 
