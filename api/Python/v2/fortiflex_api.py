@@ -27,11 +27,15 @@ FAZ_VM = 7                                  # FortiAnalyzer Virtual Machine
 FPC_VM = 8                                  # FortiPortal Virtual Machine
 FAD_VM = 9                                  # FortiADC Virtual Machine
 FGT_HW = 101                                # FortiGate Hardware
+FAP_HW = 102                                # FortiAP
+FSW_HW = 103                                # FortiSwitch
 FWBC_PRIVATE = 202                          # FortiWeb Cloud - Private
 FWBC_PUBLIC = 203                           # FortiWeb Cloud - Public
 FC_EMS_CLOUD = 204                          # FortiClient EMS Cloud
 FORTISASE = 205                             # FortiSASE
 FORTIEDR = 206                              # FortiEDR
+FORTIRECON = 208                            # FortiRecon
+SEIM_CLOUD = 209                            # FortiSIEM Cloud
 
 # Product Parameters                        # Valid Values
 
@@ -101,7 +105,7 @@ FC_EMS_OP_ZTNA_NUM = 13                     # 0 - 25000 inclusive
 FC_EMS_OP_EPP_ZTNA_NUM = 14                 # 0 - 25000 inclusive
 FC_EMS_OP_CHROMEBOOK = 15                   # 0 - 25000 inclusive
 FC_EMS_OP_SUPPORT_SERVICE = 16              # "FCTFC247" = FortiCare Premium
-FC_EMS_OP_ADDOS = 36                        # "BPS" = FortiCare Best Practice
+FC_EMS_OP_ADDONS = 36                       # "BPS" = FortiCare Best Practice
 
 ###########################################
 # FortiAnalyzer VM                        #
@@ -109,6 +113,8 @@ FC_EMS_OP_ADDOS = 36                        # "BPS" = FortiCare Best Practice
 FAZ_VM_DAILY_STORAGE = 21                   # 5 - 8300 inclusive
 FAZ_VM_ADOM_NUM = 22                        # 0 - 1200 inclusive
 FAZ_VM_SUPPORT_SERVICE = 23                 # "FAZFC247" = FortiCare Premium
+FAZ_VM_ADDONS = 58                          # "FAZISSS" = OT Security Service
+                                            # "FAZFGSA" = Attack Surface Security Service
 
 ###########################################
 # FortiPortal VM                          #
@@ -126,8 +132,7 @@ FAD_VM_SERVICE_PACKAGE = 26                 # "FDVSTD" = Standard
 ###########################################
 # FortiGate Hardware                      #
 ###########################################
-FGT_HW_DEVICE_MODEL = 27                    # "FGT40F" = FortiGate 40F
-                                            # "FWF40F" = FortiWifi 40F
+FGT_HW_DEVICE_MODEL = 27                    # "FWF40F" = FortiWifi 40F
                                             # "FGT60E" = FortiGate 60E
                                             # "FGT60F" = FortiGate 60F
                                             # "FWF60F" = FortiWifi 60F
@@ -153,14 +158,14 @@ FGT_HW_DEVICE_MODEL = 27                    # "FGT40F" = FortiGate 40F
                                             # "FG3K0F" = FortiGate 3000F
                                             # "FG3K1F" = FortiGate 3001F
                                             # "FG3K2F" = FortiGate 3200F
-                                            # "FG40FI" = FortiGate 40F-3G4G
+                                            # "FG40FI " = FortiGate 40F-3G4G
                                             # "FW40FI" = FortiWifi 40F-3G4G
                                             # "FWF61F" = FortiWifi 61F
                                             # "FR60FI" = FortiGateRugged 60F 3G4G
                                             # "FGT71F" = FortiGate 71F
                                             # "FG80FP" = FortiGate 80F-PoE
                                             # "FG80FB" = FortiGate 80F-Bypass
-                                            # "FG80FD" = FortiGate 80F DSL
+                                            # "FG80FD " = FortiGate 80F DSL
                                             # "FWF80F" = FortiWiFi 80F-2R
                                             # "FW80FS" = FortiWiFi 80F-2R-3G4G-DSL
                                             # "FWF81F" = FortiWiFi 81F 2R
@@ -168,16 +173,16 @@ FGT_HW_DEVICE_MODEL = 27                    # "FGT40F" = FortiGate 40F
                                             # "FW81FD" = FortiWiFi 81F-2R-3G4G-PoE
                                             # "FW81FP" = FortiWiFi 81F 2R POE
                                             # "FG81FP" = FortiGate 81F-PoE
-                                            # "FGT90G" = FortiGate 90G
-                                            # "FGT91G" = FortiGate 91G
-                                            # "FG201E" = FortiGate 201E
-                                            # "FG4H0E" = FortiGate 400E
-                                            # "FG4HBE" = FortiGate 400E BYPASS
-                                            # "FG4H1E" = FortiGate 401E
-                                            # "FD4H1E" = FortiGate 401E DC
-                                            # "FG6H0E" = FortiGate 600E
-                                            # "FG6H1E" = FortiGate 601E
-                                            # "FG6H1F" = FortiGate 601F
+                                            # "FGT90G " = FortiGate 90G
+                                            # "FGT91G " = FortiGate 91G
+                                            # "FG201E " = FortiGate 201E
+                                            # "FG4H0E " = FortiGate 400E
+                                            # "FG4HBE " = FortiGate 400E BYPASS
+                                            # "FG4H1E " = FortiGate 401E
+                                            # "FD4H1E " = FortiGate 401E DC
+                                            # "FG6H0E " = FortiGate 600E
+                                            # "FG6H1E " = FortiGate 601E
+                                            # "FG6H1F " = FortiGate 601F
                                             # "FG9H0G" = FortiGate 900G
                                             # "FG9H1G" = FortiGate 901G
                                             # "FG1K1F" = FortiGate 1001F
@@ -200,6 +205,37 @@ FGT_HW_ADDONS = 29                          # "FGHWFCELU" = FortiCare Elite Upgr
                                             # "FGHWMGAS" = Managed FortiGate
                                             # "FGHWSPAL" = SD-WAN Connector for FortiSASE
                                             # "FGHWFCSS" = FortiConverter Service
+
+###########################################
+# FortiAP Hardware                        #
+###########################################
+FAP_HW_DEVICE_MODEL = 55                    # "FP23JF" = FortiAP-23JF
+                                            # "FP221E" = FortiAP-221E
+                                            # "FP223E" = FortiAP-223E
+                                            # "FP231F" = FortiAP-231F
+                                            # "FP231G" = FortiAP-231G
+                                            # "FP233G" = FortiAP-233G
+                                            # "FP234F" = FortiAP-234F
+                                            # "FP234G" = FortiAP-234G
+                                            # "FP431F" = FortiAP-431F
+                                            # "FP431G" = FortiAP-431G
+                                            # "FP432F" = FortiAP-432F
+                                            # "F432FR" = FortiAP-432FR
+                                            # "FP432G" = FortiAP-432G
+                                            # "FP433F" = FortiAP-433F
+                                            # "FP433G" = FortiAP-433G
+                                            # "FP441K" = FortiAP-441K
+                                            # "FP443K" = FortiAP-443K
+                                            # "FP831F" = FortiAP-831F
+                                            # "PU231F" = FortiAP-U231F
+                                            # "PU234F" = FortiAP-U234F
+                                            # "PU422E" = FortiAP-U422EV
+                                            # "PU431F" = FortiAP-U431F
+                                            # "PU432F" = FortiAP-U432F
+                                            # "PU433F" = FortiAP-U433F
+FAP_HW_SERVICE_PACKAGE = 56                 # "FAPHWFC247" = FortiCare Premium
+                                            # "FAPHWFCEL" = FortiCare Elite
+FAP_HW_ADDONS = 57                          # "FAPHWFSFG" = FortiSASE Cloud Managed AP
 
 ###########################################
 # FortiWeb Cloud - Private                #
