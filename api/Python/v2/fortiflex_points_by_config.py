@@ -14,8 +14,11 @@ import sys
 import logging
 import requests
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 # FortiCloud and FortiFlex API Endpoints
 FORTIFLEX_API_BASE_URI = "https://support.fortinet.com/ES/api/fortiflex/v2/"
@@ -178,7 +181,7 @@ if __name__ == "__main__":
         api_access_token,
         "ELAVMR0000000241",
         "1900-01-01",
-        "2024-09-12",
+        "2025-08-12",
         config_id=678,
         #serial_number="FGVMELTM22000195",
         #account_id="1127201",

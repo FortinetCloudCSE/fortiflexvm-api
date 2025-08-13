@@ -1,7 +1,3 @@
-locals {
-
-}
-
 data "fortiflexvm_entitlements_points" "entitlements_points" {
   config_id  = var.config_id
   account_id = var.account_id != null ? var.account_id : null
