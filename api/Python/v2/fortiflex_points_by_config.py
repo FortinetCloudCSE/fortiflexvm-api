@@ -182,7 +182,7 @@ if __name__ == "__main__":
         "ELAVMR0000000241",
         "1900-01-01",
         "2025-08-12",
-        config_id=678,
+        config_id=679,
         #serial_number="FGVMELTM22000195",
         #account_id="1127201",
     )

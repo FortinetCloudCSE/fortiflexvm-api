@@ -1,5 +1,5 @@
 data "fortiflexvm_configs_list" "configs_list" {
-  program_serial_number = local.program_serial_number
+  program_serial_number = var.program_serial_number
 }
 
 output "configs_list" {

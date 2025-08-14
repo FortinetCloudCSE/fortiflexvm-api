@@ -1,3 +1,9 @@
+variable "program_serial_number" {
+  description = "FortiFlex Program Serial Number"
+  type        = string
+  default     = null
+}
+
 variable "account_id" {
   description = "FortiFlex Account ID"
   type        = string
@@ -19,4 +25,9 @@ variable "end_date" {
   description = "End date for the report"
   type        = string
   default     = null
+}
+
+variable "enable_output" {
+  description = "Enable/Disable output"
+  default     = true
 }
