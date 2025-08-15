@@ -1,0 +1,1647 @@
+{
+	"info": {
+		"_postman_id": "4f8c1830-1ff3-4463-be14-ad1efc3ca8e4",
+		"name": "FortiCloud Collection AssetMgmt, Organization, IAM, FortiFlex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "802252"
+	},
+	"item": [
+		{
+			"name": "Organization v1 - Units",
+			"item": [
+				{
+					"name": "Units - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentId\": 123,\n  \"name\": \"New OU\",\n  \"desc\": \"Some description\"\n}"
+						},
+						"url": {
+							"raw": "{{org_base_url}}/units/create",
+							"host": [
+								"{{org_base_url}}"
+							],
+							"path": [
+								"units",
+								"create"
+							]
+						},
+						"description": "Create new OU in the Organization"
+					},
+					"response": []
+				},
+				{
+					"name": "Units - Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 222\n}"
+						},
+						"url": {
+							"raw": "{{org_base_url}}/units/delete",
+							"host": [
+								"{{org_base_url}}"
+							],
+							"path": [
+								"units",
+								"delete"
+							]
+						},
+						"description": "Delete an existing OU (must be empty)"
+					},
+					"response": []
+				},
+				{
+					"name": "Units - List",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}"
+						},
+						"url": {
+							"raw": "{{org_base_url}}/units/list",
+							"host": [
+								"{{org_base_url}}"
+							],
+							"path": [
+								"units",
+								"list"
+							]
+						},
+						"description": "Get list of OUs. Filters optional."
+					},
+					"response": []
+				},
+				{
+					"name": "Units - Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 222,\n  \"name\": \"Updated OU\",\n  \"desc\": \"Some description Updated\"\n}"
+						},
+						"url": {
+							"raw": "{{org_base_url}}/units/update",
+							"host": [
+								"{{org_base_url}}"
+							],
+							"path": [
+								"units",
+								"update"
+							]
+						},
+						"description": "Update an existing OU's name/desc"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{org_access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "IAM v1 - Accounts",
+			"item": [
+				{
+					"name": "Accounts - Get Common Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{iam_base_url}}/accounts/getcommondata",
+							"host": [
+								"{{iam_base_url}}"
+							],
+							"path": [
+								"accounts",
+								"getcommondata"
+							]
+						},
+						"description": "Returns countries, industries, sizes used when creating accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentId\": 123,\n  \"firstName\": \"Master\",\n  \"lastName\": \"User\",\n  \"company\": \"Test Enterprises Ltd.\",\n  \"title\": \"test title\",\n  \"address\": \"4260 Stillcreek Dr.\",\n  \"city\": \"Vancouver\",\n  \"state\": \"BC\",\n  \"countryId\": 124,\n  \"postalCode\": \"V7M0A6\",\n  \"phone\": \"+1 6041231234\",\n  \"fax\": \"\",\n  \"industryId\": 2,\n  \"sizeId\": 44\n}"
+						},
+						"url": {
+							"raw": "{{iam_base_url}}/accounts/create",
+							"host": [
+								"{{iam_base_url}}"
+							],
+							"path": [
+								"accounts",
+								"create"
+							]
+						},
+						"description": "Create a new account under an OU"
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts - List",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentId\": 1418783\n}"
+						},
+						"url": {
+							"raw": "{{iam_base_url}}/accounts/list",
+							"host": [
+								"{{iam_base_url}}"
+							],
+							"path": [
+								"accounts",
+								"list"
+							]
+						},
+						"description": "Get list of accounts by parentId/email/accountId (all optional)"
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts - Move",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"destinationParentId\": 150,\n  \"accountIds\": [\n    12345\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{iam_base_url}}/accounts/move",
+							"host": [
+								"{{iam_base_url}}"
+							],
+							"path": [
+								"accounts",
+								"move"
+							]
+						},
+						"description": "Move accounts to a different OU"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{iam_access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "IAM v1 - Roles",
+			"item": [
+				{
+					"name": "Roles - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountId\": 12345,\n  \"profileName\": \"Permission Profile Name\",\n  \"idpRoleName\": \"new_idp_role\",\n  \"type\": \"Organization\",\n  \"nodeId\": 223344,\n  \"folderId\": null\n}"
+						},
+						"url": {
+							"raw": "{{iam_base_url}}/roles/create",
+							"host": [
+								"{{iam_base_url}}"
+							],
+							"path": [
+								"roles",
+								"create"
+							]
+						},
+						"description": "Create new IDP role (type = Organization or Local)"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{iam_access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Asset Management V3",
+			"item": [
+				{
+					"name": "License",
+					"item": [
+						{
+							"name": "Returns list of licenses based on given criteria",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/licenses/list",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"licenses",
+										"list"
+									]
+								},
+								"description": "Return list of licenses\nRequired permission: ReadOnly"
+							},
+							"response": []
+						},
+						{
+							"name": "Register license",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/licenses/register",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"licenses",
+										"register"
+									]
+								},
+								"description": "Used for registering license\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						},
+						{
+							"name": "Download VM license file",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/licenses/download",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"licenses",
+										"download"
+									]
+								},
+								"description": "Used to download license key file for supported VM products\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Returns products with active entitlements",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/list",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"list"
+									]
+								},
+								"description": "Query product list based on product SN search pattern or support package expiration date\nRequired permission: Read"
+							},
+							"response": []
+						},
+						{
+							"name": "Register multiple products and contracts in one request",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/register",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"register"
+									]
+								},
+								"description": "Register multiple products/contracts in one request\nRequired permission: ReadWrite/Admin<ul><li>\"countryCode\" follows ISO 3166 Alpha-2 codes</li><li>For certain countries (United States, Canada, India, Brazil and Ukraine), \"stateOrProvince\" must be one of standard 2-letter abbreviations for the corresponding country</li><li>\"phone\" and \"fax\" must follow this format (without brackets): \"+(country code)(space)(number)\"</li></ul>"
+							},
+							"response": []
+						},
+						{
+							"name": "Update description of a product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/description",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"description"
+									]
+								},
+								"description": "Update description of a product using serial number\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						},
+						{
+							"name": "Returns product detailed information, including active support coverage and associated licenses",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/details",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"details"
+									]
+								},
+								"description": "Used to get product details\nRequired permission: Read \n\n Quantity of support seats can be found under relevant support type in Entitlements section of Response: \n <ul><li>Number of CPUs for subscription-based models: support type 113</li><li> VDOMs: support type 207 </li><li> ADOMs: support type 152</li></ul>"
+							},
+							"response": []
+						},
+						{
+							"name": "Update location of a product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/location",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"location"
+									]
+								},
+								"description": "Update or delete (pass null as parameter) location of a product using serial number\nRequired permission: ReadWrite/Admin<ul><li>\"countryCode\" follows ISO 3166 Alpha-2 codes</li><li>For certain countries (United States, Canada, India, Brazil and Ukraine), \"stateOrProvince\" must be one of standard 2-letter abbreviations for the corresponding country</li><li>\"phone\" and \"fax\" must follow this format (without brackets): \"+(country code)(space)(number)\"</li></ul>"
+							},
+							"response": []
+						},
+						{
+							"name": "Update folder of a product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/folder",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"folder"
+									]
+								},
+								"description": "Move product to an asset folder.To use My Assets folder as target, send folderId = null.\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						},
+						{
+							"name": "Decommission one or more products",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/decommission",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"decommission"
+									]
+								},
+								"description": "Decommission products using serial number\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						},
+						{
+							"name": "Transfers products between accounts in the same Organization",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/products/transfer",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"products",
+										"transfer"
+									]
+								},
+								"description": "The API user making this request should have access to source and target accounts through OU scope\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Folder",
+					"item": [
+						{
+							"name": "Returns asset folder list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"accountId\": 1525959\n}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/folders/list",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"folders",
+										"list"
+									]
+								},
+								"description": "Query folder list\nRequired permission: Read"
+							},
+							"response": []
+						},
+						{
+							"name": "Creates new asset folder",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/folders/create",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"folders",
+										"create"
+									]
+								},
+								"description": "Create new asset folder\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletes asset folder",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/folders/delete",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"folders",
+										"delete"
+									]
+								},
+								"description": "Delete an asset folder. The folder should be empty.\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Contract",
+					"item": [
+						{
+							"name": "Returns list of contracts based on given criteria",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/contracts/list",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"contracts",
+										"list"
+									]
+								},
+								"description": "Return list of contracts\nRequired permission: ReadOnly"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Service",
+					"item": [
+						{
+							"name": "Register a subscription contract (e.g. VM-S) to generate serial number",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{asset_base_url}}/services/register",
+									"host": [
+										"{{asset_base_url}}"
+									],
+									"path": [
+										"services",
+										"register"
+									]
+								},
+								"description": "Register a subscription contract (e.g. VM-S) to generate serial number\nRequired permission: ReadWrite/Admin"
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{asset_access_token}}",
+						"type": "string"
+					}
+				]
+			}
+		},
+		{
+			"name": "FortiFlex V2.0",
+			"item": [
+				{
+					"name": "Programs",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/programs/list",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"programs",
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "APIs to work with FortiFlex Programs"
+				},
+				{
+					"name": "Configurations",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000519\",\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/configs/list",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"configs",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000101\",\n    \"accountId\": 100000,\n    \"name\": \"Test Configuration\",\n    \"productTypeId\": {{FGT_VM_BUNDLE}},\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/configs/create",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"configs",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 22,\n    \"name\": \"New Configuration name\",\n    \"parameters\": [\n        {\n            \"id\": {{FGT_VM_BUNDLE}},\n            \"value\": \"8\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/configs/update",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"configs",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disable",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/configs/disable",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"configs",
+										"disable"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "enable",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/configs/enable",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"configs",
+										"enable"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "APIs to work with FortiFlex Configurations"
+				},
+				{
+					"name": "Entitlements",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountId\": 1974985,\n    \"programSerialNumber\": \"ELAVMS0000000518\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/list",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vm/create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"configId\": \"000\",\n    \"count\": \"0\",\n    \"description\": \"VM Entitlements\",\n    \"endDate\": \"YYYY-MM-DD\",\n    \"folderPath\": \"My Assets/vm_entitlements\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/vm/create",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"vm",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "hardware/create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"configId\": 22,\n    \"serialNumbers\": [\n        \"FGT60FTK19000010\",\n        \"FGT60FTK19000013\"\n    ],\n    \"endDate\": \"2026-10-11 00:00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/hardware/create",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"hardware",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cloud/create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"configId\": \"000\",\n    \"endDate\": \"YYYY-MM-DD 00:00:00\",\n    \"folderPath\": \"My Assets/cloud_entitlements\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/cloud/create",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"cloud",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\",\n    \"configId\": \"000\",\n    \"description\": \"VM04 UTM\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/update",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "stop",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"serialNumber\": \"FWBCLE0000000357\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/stop",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"stop"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reactivate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"serialNumber\": \"FWBCLE0000000357\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/reactivate",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"reactivate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vm/token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/vm/token",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"vm",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "points by config id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"configId\": \"000\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/points",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"points"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "points by serial number",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountId\": 123456,\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/points",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"points"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transfer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sourceAccountId\": 7777777,\n    \"sourceConfigId\": 333,\n    \"targetAccountId\": 8888888,\n    \"targetConfigId\": 999,\n    \"serialNumbers\": [ \"FGVMELTM55500016\", \"FGVMELTM55500017\" ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/entitlements/transfer",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"entitlements",
+										"transfer"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "APIs to work with FortiFlex Entitlements"
+				},
+				{
+					"name": "Groups",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountId\": 1234567\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/groups/list",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"groups",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "nexttoken",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountId\": 12345,\n    \"folderPath\": \"My Assets/Department A/FortiFlex Group 1\",\n    \"configId\": 12,\n    \"status\": [\n        \"ACTIVE\",\n        \"PENDING\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/groups/nexttoken",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"groups",
+										"nexttoken"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "APIs to work with FortiFlex groups (asset folders)"
+				},
+				{
+					"name": "Tools",
+					"item": [
+						{
+							"name": "calc",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000123\",\n    \"count\": 3,\n    \"productTypeId\": 1,\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/tools/calc",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"tools",
+										"calc"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "APIs to work with FortiFlex tools"
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{flexvm_access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Dual-token password grant for Fortinet Org (organization) and IAM (iam)",
+					"function needsToken(tokenVar, expiryVar) {",
+					"  const tok = pm.collectionVariables.get(tokenVar);",
+					"  const exp = pm.collectionVariables.get(expiryVar);",
+					"  if (!tok || !exp) return true;",
+					"  const now = Date.now();",
+					"  const expMs = parseInt(exp, 10);",
+					"  return isNaN(expMs) || now >= (expMs - 60000);",
+					"}",
+					"",
+					"const tokenUrl = pm.collectionVariables.get(\"token_url\");",
+					"const username = pm.collectionVariables.get(\"api_user\");",
+					"const password = pm.collectionVariables.get(\"api_password\");",
+					"",
+					"if (!tokenUrl || !username || !password) {",
+					"  console.log(\"token_url/api_user/api_password not set.\");",
+					"} else {",
+					"  // Choose which client/token variables to use based on URL",
+					"  let cid = \"iam\";",
+					"  let tokenVar = \"iam_access_token\";",
+					"  let expiryVar = \"iam_access_token_expires_at\";",
+					"  try {",
+					"    const u = pm.request.url.toString();",
+					"    if (u.includes(\"org\")) {",
+					"      cid = \"organization\";",
+					"      tokenVar = \"org_access_token\";",
+					"      expiryVar = \"org_access_token_expires_at\";",
+					"    } else if (u.includes(\"iam\")) {",
+					"      cid = \"iam\";",
+					"      tokenVar = \"iam_access_token\";",
+					"      expiryVar = \"iam_access_token_expires_at\";",
+					"    }  else if (u.includes(\"asset\")) {",
+					"      cid = \"assetmanagement\";",
+					"      tokenVar = \"asset_access_token\";",
+					"      expiryVar = \"asset_access_token_expires_at\";",
+					"    } else if (u.includes(\"flex\")) {",
+					"      cid = \"flexvm\";",
+					"      tokenVar = \"flexvm_access_token\";",
+					"      expiryVar = \"flexvm_access_token_expires_at\";",
+					"    }",
+					"    const overrideCid = pm.collectionVariables.get(\"client_id\");",
+					"    if (overrideCid) cid = overrideCid;",
+					"  } catch (e) { /* ignore */ }",
+					"",
+					"  // Fetch if needed",
+					"  if (needsToken(tokenVar, expiryVar)) {",
+					"    const body = [",
+					"      { key: \"grant_type\", value: \"password\", type: \"text\" },",
+					"      { key: \"client_id\", value: cid, type: \"text\" },",
+					"      { key: \"username\", value: username, type: \"text\" },",
+					"      { key: \"password\", value: password, type: \"text\" }",
+					"    ];",
+					"    pm.sendRequest({",
+					"      url: tokenUrl,",
+					"      method: \"POST\",",
+					"      header: [{ key: \"Content-Type\", value: \"application/x-www-form-urlencoded\" }],",
+					"      body: { mode: \"urlencoded\", urlencoded: body }",
+					"    }, function (err, res) {",
+					"      if (err) { console.log(\"Token request error:\", err); return; }",
+					"      let data = {};",
+					"      try { data = res.json(); } catch (e) { /* ignore */ }",
+					"      const token = data.access_token || data.token || data.id_token;",
+					"      const expiresIn = data.expires_in || 3600;",
+					"      if (token) {",
+					"        pm.collectionVariables.set(tokenVar, token);",
+					"        pm.collectionVariables.set(expiryVar, String(Date.now() + expiresIn * 1000));",
+					"        console.log(`Access token for ${cid} stored in ${tokenVar}, expires in ${expiresIn}s`);",
+					"      } else {",
+					"        console.log(\"No access_token in response:\", res.text());",
+					"      }",
+					"    });",
+					"  }",
+					"",
+					"  // Inject correct Authorization header for this request",
+					"  let bearer = \"\";",
+					"  try {",
+					"    const u = pm.request.url.toString();",
+					"    if (u.includes(\"org\")) {",
+					"      bearer = pm.collectionVariables.get(\"org_access_token\");",
+					"    } else if (u.includes(\"iam\")) {",
+					"      bearer = pm.collectionVariables.get(\"iam_access_token\");",
+					"    } else if (u.includes(\"asset\")) {",
+					"      bearer = pm.collectionVariables.get(\"asset_access_token\");",
+					"    } else if (u.includes(\"flex\")) {",
+					"      bearer = pm.collectionVariables.get(\"flexvm_access_token\");",
+					"    }",
+					"  } catch (e) { /* ignore */ }",
+					"  if (bearer) {",
+					"    // Remove any existing Authorization to avoid duplicates",
+					"    pm.request.headers.upsert({ key: \"Authorization\", value: `Bearer ${bearer}` });",
+					"  }",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "org_base_url",
+			"value": "https://support.fortinet.com/es/api/organization/v1"
+		},
+		{
+			"key": "iam_base_url",
+			"value": "https://support.fortinet.com/es/api/iam/v1"
+		},
+		{
+			"key": "asset_base_url",
+			"value": "https://support.fortinet.com/ES/api/registration/v3"
+		},
+		{
+			"key": "flexvm_base_url",
+			"value": "https://support.fortinet.com/ES/api/fortiflex/v2"
+		},
+		{
+			"key": "token_url",
+			"value": "https://customerapiauth.fortinet.com/api/v1/oauth/token/"
+		},
+		{
+			"key": "api_user",
+			"value": ""
+		},
+		{
+			"key": "api_password",
+			"value": ""
+		},
+		{
+			"key": "client_id",
+			"value": ""
+		},
+		{
+			"key": "org_access_token",
+			"value": ""
+		},
+		{
+			"key": "org_access_token_expires_at",
+			"value": ""
+		},
+		{
+			"key": "iam_access_token",
+			"value": ""
+		},
+		{
+			"key": "iam_access_token_expires_at",
+			"value": ""
+		},
+		{
+			"key": "asset_access_token",
+			"value": ""
+		},
+		{
+			"key": "asset_access_token_expires_at",
+			"value": ""
+		},
+		{
+			"key": "flexvm_access_token",
+			"value": ""
+		},
+		{
+			"key": "flexvm_access_token_expires_at",
+			"value": ""
+		}
+	]
+}

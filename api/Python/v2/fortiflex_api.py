@@ -15,7 +15,7 @@ import logging
 import requests
 
 logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.WARNING)
 
 # Product Types
 FGT_VM_BUNDLE = 1                           # FortiGate Virtual Machine - Service Bundle
@@ -26,6 +26,9 @@ FC_EMS_OP = 5                               # FortiClient EMS On-Prem
 FAZ_VM = 7                                  # FortiAnalyzer Virtual Machine
 FPC_VM = 8                                  # FortiPortal Virtual Machine
 FAD_VM = 9                                  # FortiADC Virtual Machine
+FORTISOAR_VM = 10                           # FortiSOAR Virtual Machine
+FORTIMAIL_VM = 11                           # FortiMail Virtual Machine
+FORTINAC_VM = 12                            # FortiNAC Virtual Machine
 FGT_HW = 101                                # FortiGate Hardware
 FAP_HW = 102                                # FortiAP
 FSW_HW = 103                                # FortiSwitch
@@ -34,8 +37,11 @@ FWBC_PUBLIC = 203                           # FortiWeb Cloud - Public
 FC_EMS_CLOUD = 204                          # FortiClient EMS Cloud
 FORTISASE = 205                             # FortiSASE
 FORTIEDR = 206                              # FortiEDR
+FORTINDR_CLOUD = 207                        # FortiNDR Cloud
 FORTIRECON = 208                            # FortiRecon
 SEIM_CLOUD = 209                            # FortiSIEM Cloud
+FORTIAPPSEC = 211                           # FortiAppSec
+FORTIDLP = 212                              # FortiDLP
 
 # Product Parameters                        # Valid Values
 
@@ -250,6 +256,18 @@ FWBC_PUBLIC_AVERAGE_THROUGHPUT = 34        # All Mbps - 10, 25, 50, 75, 100, 150
 FWBC_PUBLIC_WEB_APPLICATIONS = 35          # 0 - 2000 inclusive
 
 ###########################################
+# FortiAppSec Cloud                       #
+###########################################
+FAPPSEC_SERVICE_TYPE = 82                  # "UCWAF" = Cloud WAF, "UCGSLB" = Cloud GSLB
+FAPPSEC_WAF_SERVICE_PACKAGE = 83           # "UCWAFSTD" = Standard, "UCWAFADV" = Advanced, "UCWAFENT" = Enterprise
+FAPPSEC_WAF_ADDONS = 84                    # "UCSOCA" = SOCaaS
+FAPPSEC_THROUGHPUT = 85             # All Mbps - 10, 25, 50, 75, 100, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000
+FAPPSEC_APPLICATIONS = 86               # 0 - 2000 inclusive
+FAPPSEC_QPS = 87                          #
+FAPPSEC_HEALTH_CHECKS = 88                #
+
+
+###########################################
 # FortiEMS Cloud                          #
 ###########################################
 FC_EMS_CLOUD_ZTNA_NUM = 37                 # Value should be divisible by 25. 0 - 25000 inclusive
@@ -274,7 +292,7 @@ FORTIEDR_SERVICEPACK = 46                  # FSASESTD or FSASEADV
 FORTIEDR_ENDPOINT = 47                     # Read-only
 FORTIEDR_ADDONS = 52                       # FEDRXDR = XDR
 
-# FortiCloud and FortiFlex API Endpoints
+# FortiCloud_localDev and FortiFlex API Endpoints
 FORTIFLEX_API_BASE_URI = "https://support.fortinet.com/ES/api/fortiflex/v2/"
 FORTICARE_AUTH_URI = "https://customerapiauth.fortinet.com/api/v1/oauth/token/"
 
@@ -716,7 +734,7 @@ if __name__ == "__main__":
     API_CLIENT_ID = os.getenv("API_CLIENT_ID", "flexvm")
     API_GRANT_TYPE = os.getenv("API_GRANT_TYPE", "password")
 
-    #### Get FortiCloud API Token ####
+    #### Get FortiCloud_localDev API Token ####
     ##################################
     api_token = get_token(
         FORTIFLEX_ACCESS_USERNAME,
