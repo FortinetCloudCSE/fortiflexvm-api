@@ -139,7 +139,26 @@
 						"type": "text/javascript",
 						"packages": {},
 						"exec": [
-							""
+							"// Warn if dependent variables are missing before sending FortiFlex requests",
+							"try {",
+							"  const body = pm.request && pm.request.body && pm.request.body.mode === 'raw' ? (pm.request.body.raw || '') : '';",
+							"  const needsProgramSN = body.includes('{{programSerialNumber}}');",
+							"  const needsAccountId = body.includes('{{accountId}}');",
+							"  const warnings = [];",
+							"  if (needsProgramSN) {",
+							"    const psn = pm.collectionVariables.get('programSerialNumber');",
+							"    if (!psn) warnings.push('programSerialNumber is not set. Run FortiFlex -> Programs -> list or set it in collection variables.');",
+							"  }",
+							"  if (needsAccountId) {",
+							"    const aid = pm.collectionVariables.get('accountId');",
+							"    if (!aid) warnings.push('accountId is not set. Set it manually in collection variables.');",
+							"  }",
+							"  if (warnings.length) {",
+							"    console.warn('Pre-request check:', warnings.join(' '));",
+							"    // Surface in request headers for visibility in Postman UI",
+							"    pm.request.headers.upsert({ key: 'X-Preflight-Warning', value: warnings.join(' | ') });",
+							"  }",
+							"} catch (e) { /* ignore */ }"
 						]
 					}
 				},
@@ -315,7 +334,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"accountId\": 12345,\n  \"profileName\": \"Permission Profile Name\",\n  \"idpRoleName\": \"new_idp_role\",\n  \"type\": \"Organization\",\n  \"nodeId\": 223344,\n  \"folderId\": null\n}"
+							"raw": "{\n  \"accountId\": {{accountId}},\n  \"profileName\": \"Permission Profile Name\",\n  \"idpRoleName\": \"new_idp_role\",\n  \"type\": \"Organization\",\n  \"nodeId\": 223344,\n  \"folderId\": null\n}"
 						},
 						"url": {
 							"raw": "{{iam_base_url}}/roles/create",
@@ -701,7 +720,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n        \"accountId\": 1525959\n}"
+									"raw": "{\n        \"accountId\": {{accountId}}\n}"
 								},
 								"url": {
 									"raw": "{{asset_base_url}}/folders/list",
@@ -884,7 +903,38 @@
 									]
 								}
 							},
-							"response": []
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											"// Extract first program's serialNumber and store as collection variable; accountId is manual",
+											"try {",
+											"  let arr = [];",
+											"  const j = pm.response.json();",
+											"  if (Array.isArray(j)) {",
+											"    arr = j;",
+											"  } else if (j && Array.isArray(j.programs)) {",
+											"    arr = j.programs;",
+											"  } else if (j && j.data && Array.isArray(j.data.programs)) {",
+											"    arr = j.data.programs;",
+											"  }",
+											"  if (arr.length) {",
+											"    const first = arr[0];",
+											"    const sn = first.programSerialNumber || first.serialNumber;",
+											"    if (sn) pm.collectionVariables.set('programSerialNumber', sn);",
+											"    console.log('Set programSerialNumber from Programs/list');",
+											"  } else {",
+											"    console.log('Programs/list returned no programs');",
+											"  }",
+											"} catch (e) { console.log('Failed parsing Programs/list response', e); }"
+										]
+									}
+								}
+							]
 						}
 					],
 					"description": "APIs to work with FortiFlex Programs"
@@ -899,7 +949,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000519\",\n}",
+									"raw": "{\n    \"programSerialNumber\": \"{{programSerialNumber}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -926,7 +976,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000101\",\n    \"accountId\": 100000,\n    \"name\": \"Test Configuration\",\n    \"productTypeId\": {{FGT_VM_BUNDLE}},\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+									"raw": "{\n    \"programSerialNumber\": \"{{programSerialNumber}}\",\n    \"accountId\": {{accountId}},\n    \"name\": \"Test Configuration\",\n    \"productTypeId\": {{FGT_VM_BUNDLE}},\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1040,7 +1090,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"accountId\": 1974985,\n    \"programSerialNumber\": \"ELAVMS0000000518\"\n}",
+									"raw": "{\n    \"accountId\": {{accountId}},\n    \"programSerialNumber\": \"{{programSerialNumber}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1287,7 +1337,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"accountId\": 123456,\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+									"raw": "{\n    \"accountId\": {{accountId}},\n    \"serialNumber\": \"FGVXXXXXXXXXXXXX\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1347,7 +1397,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"accountId\": 1234567\n}",
+									"raw": "{\n    \"accountId\": {{accountId}}\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1374,7 +1424,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"accountId\": 12345,\n    \"folderPath\": \"My Assets/Department A/FortiFlex Group 1\",\n    \"configId\": 12,\n    \"status\": [\n        \"ACTIVE\",\n        \"PENDING\"\n    ]\n}",
+									"raw": "{\n    \"accountId\": {{accountId}},\n    \"folderPath\": \"My Assets/Department A/FortiFlex Group 1\",\n    \"configId\": 12,\n    \"status\": [\n        \"ACTIVE\",\n        \"PENDING\"\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1407,7 +1457,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"programSerialNumber\": \"ELAVMR0000000123\",\n    \"count\": 3,\n    \"productTypeId\": 1,\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
+									"raw": "{\n    \"programSerialNumber\": \"{{programSerialNumber}}\",\n    \"count\": 3,\n    \"productTypeId\": 1,\n    \"parameters\": [\n        {\n            \"id\": 1,\n            \"value\": \"4\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"UTP\"\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1641,6 +1691,14 @@
 		},
 		{
 			"key": "flexvm_access_token_expires_at",
+			"value": ""
+		},
+		{
+			"key": "programSerialNumber",
+			"value": ""
+		},
+		{
+			"key": "accountId",
 			"value": ""
 		}
 	]
