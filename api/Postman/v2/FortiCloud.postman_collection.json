@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4f8c1830-1ff3-4463-be14-ad1efc3ca8e4",
+		"_postman_id": "f3bca4e2-0a6d-4de4-930b-c10c0df2d5f4",
 		"name": "FortiCloud Collection AssetMgmt, Organization, IAM, FortiFlex",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "802252"
@@ -880,30 +880,6 @@
 					"item": [
 						{
 							"name": "list",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{flexvm_base_url}}/programs/list",
-									"host": [
-										"{{flexvm_base_url}}"
-									],
-									"path": [
-										"programs",
-										"list"
-									]
-								}
-							},
-							"response": [],
 							"event": [
 								{
 									"listen": "test",
@@ -934,7 +910,31 @@
 										]
 									}
 								}
-							]
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{flexvm_base_url}}/programs/list",
+									"host": [
+										"{{flexvm_base_url}}"
+									],
+									"path": [
+										"programs",
+										"list"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"description": "APIs to work with FortiFlex Programs"
@@ -1521,6 +1521,7 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					"// Dual-token password grant for Fortinet Org (organization) and IAM (iam)",
 					"function needsToken(tokenVar, expiryVar) {",
@@ -1622,6 +1623,7 @@
 			"script": {
 				"type": "text/javascript",
 				"packages": {},
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -1658,6 +1660,14 @@
 			"value": ""
 		},
 		{
+			"key": "accountId",
+			"value": ""
+		},
+		{
+			"key": "programSerialNumber",
+			"value": ""
+		},
+		{
 			"key": "client_id",
 			"value": ""
 		},
@@ -1691,14 +1701,6 @@
 		},
 		{
 			"key": "flexvm_access_token_expires_at",
-			"value": ""
-		},
-		{
-			"key": "programSerialNumber",
-			"value": ""
-		},
-		{
-			"key": "accountId",
 			"value": ""
 		}
 	]
