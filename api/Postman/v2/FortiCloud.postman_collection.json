@@ -1090,7 +1090,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"accountId\": {{accountId}},\n    \"programSerialNumber\": \"{{programSerialNumber}}\"\n}",
+									"raw": "{\n    \"configId\":  \"12345\"\n }",
 									"options": {
 										"raw": {
 											"language": "json"
