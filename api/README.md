@@ -42,9 +42,9 @@ For example:
 
 ### Postman
 
-Import the desired FortiFlex version collection and environment into your Postman client.
+Import collection into a Postman client.
 
-Update the variables in the environment with your username and password.
+Update the variables in the collection.
 
 ### Python
 
@@ -100,6 +100,7 @@ All requests have a sample body except for the *list* request in the __Programs_
 
 - Programs
   - /programs/list - Get list of FortiFlex Programs for the account
+  - /programs/points - Get points balance for a FortiFlex prepaid points program
   
 - Tools
   - tools/calc - Calculate points consumption
