@@ -12,7 +12,7 @@ Authentication will be done via OAuth token. To call FortiFlex external API, 3rd
 
 2. Give desired permission (Admin, ReadWrite, ReadOnly) for FortiFlex to the newly created or existing API User. Actions that involve changing or creating data (such as creating a new Configuration or updating an entitlement) will require ReadWrite permission or above.
 
-3. Call our API at `https://customerapiauth.fortinet.com/api/v1/oauth/token/` to retrieve OAuth token. Request body should be similar to:
+3. Call API at `https://customerapiauth.fortinet.com/api/v1/oauth/token/` to retrieve OAuth token. Request body should be similar to:
 
     ```json
       {
@@ -23,7 +23,7 @@ Authentication will be done via OAuth token. To call FortiFlex external API, 3rd
       }
     ```
 
-    > Refer [here](https://docs.fortinet.com/document/fortiauthenticator/6.1.2/rest-api-solution-guide/498666/oauth-server-token-oauth-token) for more information
+    > Refer to [authentication documentation](https://docs.fortinet.com/document/fortiauthenticator/8.0.0/rest-api-solution-guide/498666) for more information
 
 4. Call FortiFlex API endpoints with the OAuth token as Authorization header with Bearer scheme.
 

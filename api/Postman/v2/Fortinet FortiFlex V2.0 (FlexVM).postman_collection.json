@@ -370,7 +370,7 @@
       "name": "Entitlements",
       "item": [
         {
-          "name": "list",
+          "name": "list by configId",
           "request": {
             "auth": {
               "type": "bearer",
@@ -386,7 +386,51 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"configId\": 0\n}",
+              "raw": "{\n\"configId\":\t0,\n\"serialNumber\": \"\",\n\"status\": \"\",\n\"tokenStatus\": \"\",\n\"description\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/list",
+              "protocol": "https",
+              "host": [
+                "support",
+                "fortinet",
+                "com"
+              ],
+              "path": [
+                "ES",
+                "api",
+                "fortiflex",
+                "v2",
+                "entitlements",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list by accountId + programSerialNumber",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"programSerialNumber\": \"\",\n\"accountId\": 0,\n\"serialNumber\": \"\",\n\"status\": \"\",\n\"tokenStatus\": \"\",\n\"description\": \"\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -430,7 +474,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"configId\": 0,\n    \"count\": 0,\n    \"description\": \"\",\n    \"endDate\": \"YYYY-MM-DD\",\n    \"folderPath\": \"My Assets/folder_name\"\n}",
+              "raw": "{\n    \"configId\": 0,\n    \"count\": 0,\n    \"description\": \"\",\n    \"endDate\": \"YYYY-MM-DD\",\n    \"folderPath\": \"My Assets/folder_name\",\n    \"skipPending\": false\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -459,7 +503,52 @@
           "response": []
         },
         {
-          "name": "hardware/create",
+          "name": "vm/token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"serialNumber\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/vm/token",
+              "protocol": "https",
+              "host": [
+                "support",
+                "fortinet",
+                "com"
+              ],
+              "path": [
+                "ES",
+                "api",
+                "fortiflex",
+                "v2",
+                "entitlements",
+                "vm",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "hardware/create (Immediate)",
           "request": {
             "auth": {
               "type": "bearer",
@@ -504,6 +593,96 @@
           "response": []
         },
         {
+          "name": "hardware/create (Scheduled)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"configId\": 0,\n    \"scheduledSerialNumbers\": [\n        {\n            \"serialNumber\": \"\",\n            \"startDateMode\": \"OVERRIDE\",\n            \"startDateOverride\": \"YYYY-MM-DD\"\n        },\n        {\n            \"serialNumber\": \"\",\n            \"startDateMode\": \"Auto\"\n        }\n    ],\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/hardware/create",
+              "protocol": "https",
+              "host": [
+                "support",
+                "fortinet",
+                "com"
+              ],
+              "path": [
+                "ES",
+                "api",
+                "fortiflex",
+                "v2",
+                "entitlements",
+                "hardware",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "hardware/remove",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"serialNumbers\": [\n        \"\",\n        \"\"\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/hardware/remove",
+              "protocol": "https",
+              "host": [
+                "support",
+                "fortinet",
+                "com"
+              ],
+              "path": [
+                "ES",
+                "api",
+                "fortiflex",
+                "v2",
+                "entitlements",
+                "hardware",
+                "remove"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "cloud/create",
           "request": {
             "auth": {
@@ -520,7 +699,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"configId\": 0,\n    \"endDate\": \"YYYY-MM-DD\",\n    \"folderPath\": \"My Assets/folder_name\"\n}",
+              "raw": "{\n    \"configId\": 0,\n    \"endDate\": \"YYYY-MM-DD 00:00:00\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -565,7 +744,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"serialNumber\": \"\",\n    \"configId\": 0,\n    \"description\": \"\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+              "raw": "{\n    \"configId\": 0,\n    \"serialNumber\": \"\",\n    \"description\": \"\",\n    \"endDate\": \"YYYY-MM-DD\",\n    \"followProgram\": true\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -653,7 +832,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"serialNumber\": \"\"\n}",
+              "raw": "{\n    \"serialNumber\": \"\",\n    \"endDate\": \"YYYY-MM-DD\",\n    \"followProgram\": true\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -681,52 +860,7 @@
           "response": []
         },
         {
-          "name": "vm/token",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{access_token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"serialNumber\": \"\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://support.fortinet.com/ES/api/fortiflex/v2/entitlements/vm/token",
-              "protocol": "https",
-              "host": [
-                "support",
-                "fortinet",
-                "com"
-              ],
-              "path": [
-                "ES",
-                "api",
-                "fortiflex",
-                "v2",
-                "entitlements",
-                "vm",
-                "token"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "points by config id",
+          "name": "points by configId",
           "request": {
             "auth": {
               "type": "bearer",
@@ -771,7 +905,7 @@
           "response": []
         },
         {
-          "name": "points by serial number",
+          "name": "points by programSerialNumber",
           "request": {
             "auth": {
               "type": "bearer",
@@ -787,7 +921,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"accountId\": {{accountid}},\n    \"serialNumber\": \"\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
+              "raw": "{\n    \"accountId\": {{accountid}},\n    \"programSerialNumber\": \"\",\n    \"startDate\": \"YYYY-MM-DD\",\n    \"endDate\": \"YYYY-MM-DD\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -925,7 +1059,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"accountId\": {{accountid}},\n    \"folderPath\": \"My Assets/folder_name\",\n    \"configId\": 0,\n    \"status\": [\n        \"ACTIVE\",\n        \"PENDING\"\n    ]\n}",
+              "raw": "{\n    \"folderPath\": \"My Assets/folder_name\",\n    \"accountId\": {{accountid}},\n    \"status\": [\n        \"ACTIVE\",\n        \"PENDING\"\n    ],\n        \"configId\": 0\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -997,6 +1131,50 @@
                 "v2",
                 "tools",
                 "calc"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "metadata",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://support.fortinet.com/ES/api/fortiflex/v2/tools/metadata",
+              "protocol": "https",
+              "host": [
+                "support",
+                "fortinet",
+                "com"
+              ],
+              "path": [
+                "ES",
+                "api",
+                "fortiflex",
+                "v2",
+                "tools",
+                "metadata"
               ]
             }
           },
