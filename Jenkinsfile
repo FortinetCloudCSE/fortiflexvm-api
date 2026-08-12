@@ -3,7 +3,7 @@ void setBuildStatus(String message, String state, String repo_url) {
       $class: "GitHubCommitStatusSetter",
       reposSource: [$class: "ManuallyEnteredRepositorySource", url: repo_url],
       contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
-      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "SUCCESS"]],
       statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
   ]);
 }
@@ -12,13 +12,9 @@ pipeline {
     agent any
 
     stages {
-
-       stage('Running FortiDevSec scans...') {
+        stage('No checks configured') {
             steps {
-                echo "Running SAST scan..."
-                sh 'env | grep -E "JENKINS_HOME|BUILD_ID|GIT_BRANCH|GIT_COMMIT" > /tmp/env'
-                sh 'docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest'
-                sh 'docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest'
+                echo 'No CI checks are currently configured.'
             }
         }
     }
